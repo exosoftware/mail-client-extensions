@@ -23,8 +23,8 @@ function _addError(message: string, state: State, icon: string = null): CardSect
             CardService.newImageButton()
                 .setAltText(_t("Close"))
                 .setIconUrl(UI_ICONS.close)
-                .setOnClickAction(actionCall(state, onCloseError.name)),
-        ),
+                .setOnClickAction(actionCall(state, onCloseError.name))
+        )
     );
     return errorSection;
 }
@@ -42,7 +42,7 @@ export function buildErrorView(state: State, card: Card) {
         errorSection.addWidget(
             CardService.newTextButton()
                 .setText(_t("Login"))
-                .setOnClickAction(CardService.newAction().setFunctionName(buildLoginMainView.name)),
+                .setOnClickAction(CardService.newAction().setFunctionName(buildLoginMainView.name))
         );
         card.addSection(errorSection);
     } else if (error.code === "insufficient_credit") {
@@ -50,7 +50,7 @@ export function buildErrorView(state: State, card: Card) {
         errorSection.addWidget(
             CardService.newTextButton()
                 .setText(_t("Buy new credits"))
-                .setOpenLink(CardService.newOpenLink().setUrl(error.information)),
+                .setOpenLink(CardService.newOpenLink().setUrl(error.information))
         );
         card.addSection(errorSection);
     } else if (error.code === "missing_data") {

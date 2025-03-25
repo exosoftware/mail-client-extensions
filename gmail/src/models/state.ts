@@ -44,7 +44,7 @@ export class State {
         partners: Partner[],
         searchedProjects: Project[],
         canCreateProject: boolean,
-        error: ErrorMessage,
+        error: ErrorMessage
     ) {
         this.partner = partner;
         this.canCreatePartner = canCreatePartner;
@@ -96,7 +96,7 @@ export class State {
             searchedPartners,
             searchedProjects,
             canCreateProject,
-            error,
+            error
         );
     }
 
@@ -168,7 +168,7 @@ export class State {
             partners: [],
             leads: [],
             tickets: [],
-            tasks: [],
+            tasks: []
         };
 
         if (!loggingStateStr || !loggingStateStr.length) {
@@ -196,7 +196,7 @@ export class State {
             cache.put(
                 cacheKey,
                 JSON.stringify(loggingState),
-                21600, // 6 hours, maximum cache life time
+                21600 // 6 hours, maximum cache life time
             );
             return true;
         }

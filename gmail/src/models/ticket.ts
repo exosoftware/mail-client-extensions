@@ -20,7 +20,7 @@ export class Ticket {
         const response = postJsonRpc(
             url,
             { email_body: emailBody, email_subject: emailSubject, partner_id: partnerId },
-            { Authorization: "Bearer " + odooAccessToken },
+            { Authorization: "Bearer " + odooAccessToken }
         );
 
         return response ? response.ticket_id || null : null;

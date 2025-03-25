@@ -67,8 +67,8 @@ export function buildCompanyView(state: State, card: Card) {
                     company.id ? odooServerUrl + `/web#id=${company.id}&model=res.partner&view_type=form${cids}` : null,
                     false,
                     company.email,
-                    CardService.ImageCropType.CIRCLE,
-                ),
+                    CardService.ImageCropType.CIRCLE
+                )
             );
         }
 
@@ -91,8 +91,8 @@ export function buildCompanyView(state: State, card: Card) {
                         null,
                         null,
                         null,
-                        actionCall(state, onUnfoldCompanyDescription.name),
-                    ),
+                        actionCall(state, onUnfoldCompanyDescription.name)
+                    )
                 );
             }
         }
@@ -105,8 +105,8 @@ export function buildCompanyView(state: State, card: Card) {
                     UI_ICONS.location,
                     null,
                     null,
-                    "https://www.google.com/maps/search/" + encodeURIComponent(company.address).replace("/", " "),
-                ),
+                    "https://www.google.com/maps/search/" + encodeURIComponent(company.address).replace("/", " ")
+                )
             );
         }
 
@@ -116,7 +116,7 @@ export function buildCompanyView(state: State, card: Card) {
 
         if (company.website) {
             companySection.addWidget(
-                createKeyValueWidget(_t("Website"), company.website, UI_ICONS.website, null, null, company.website),
+                createKeyValueWidget(_t("Website"), company.website, UI_ICONS.website, null, null, company.website)
             );
         }
 
@@ -126,13 +126,13 @@ export function buildCompanyView(state: State, card: Card) {
 
         if (company.employees) {
             companySection.addWidget(
-                createKeyValueWidget(_t("Employees"), _t("%s employees", company.employees), UI_ICONS.people),
+                createKeyValueWidget(_t("Employees"), _t("%s employees", company.employees), UI_ICONS.people)
             );
         }
 
         if (company.foundedYear) {
             companySection.addWidget(
-                createKeyValueWidget(_t("Founded Year"), "" + company.foundedYear, UI_ICONS.foundation),
+                createKeyValueWidget(_t("Founded Year"), "" + company.foundedYear, UI_ICONS.foundation)
             );
         }
 
@@ -142,7 +142,7 @@ export function buildCompanyView(state: State, card: Card) {
 
         if (company.companyType) {
             companySection.addWidget(
-                createKeyValueWidget(_t("Company Type"), company.companyType, UI_ICONS.company_type),
+                createKeyValueWidget(_t("Company Type"), company.companyType, UI_ICONS.company_type)
             );
         }
 
@@ -159,7 +159,7 @@ export function buildCompanyView(state: State, card: Card) {
                 enrichSection.addWidget(
                     CardService.newTextButton()
                         .setText(_t("Enrich Company"))
-                        .setOnClickAction(actionCall(state, onEnrichCompany.name)),
+                        .setOnClickAction(actionCall(state, onEnrichCompany.name))
                 );
             }
             card.addSection(enrichSection);
@@ -172,7 +172,7 @@ export function buildCompanyView(state: State, card: Card) {
             companySection.addWidget(
                 CardService.newTextButton()
                     .setText(_t("Create a company"))
-                    .setOnClickAction(actionCall(state, onCreateCompany.name)),
+                    .setOnClickAction(actionCall(state, onCreateCompany.name))
             );
         }
         card.addSection(companySection);
@@ -187,32 +187,32 @@ function _addSocialButtons(section: CardSection, company: Company) {
             name: "Facebook",
             url: "https://facebook.com/",
             icon: SOCIAL_MEDIA_ICONS.facebook,
-            key: "facebook",
+            key: "facebook"
         },
         {
             name: "Twitter",
             url: "https://twitter.com/",
             icon: SOCIAL_MEDIA_ICONS.twitter,
-            key: "twitter",
+            key: "twitter"
         },
         {
             name: "LinkedIn",
             url: "https://linkedin.com/",
             icon: SOCIAL_MEDIA_ICONS.linkedin,
-            key: "linkedin",
+            key: "linkedin"
         },
         {
             name: "Github",
             url: "https://github.com/",
             icon: SOCIAL_MEDIA_ICONS.github,
-            key: "github",
+            key: "github"
         },
         {
             name: "Crunchbase",
             url: "https://crunchbase.com/",
             icon: SOCIAL_MEDIA_ICONS.crunchbase,
-            key: "crunchbase",
-        },
+            key: "crunchbase"
+        }
     ];
 
     for (let media of socialMedias) {
@@ -222,7 +222,7 @@ function _addSocialButtons(section: CardSection, company: Company) {
                 CardService.newImageButton()
                     .setAltText(media.name)
                     .setIconUrl(media.icon)
-                    .setOpenLink(CardService.newOpenLink().setUrl(media.url + url)),
+                    .setOpenLink(CardService.newOpenLink().setUrl(media.url + url))
             );
         }
     }

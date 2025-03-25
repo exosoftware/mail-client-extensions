@@ -38,7 +38,7 @@ export function createKeyValueWidget(
     action: any = null,
     wrap: boolean = true,
     iconLabel: string = null,
-    iconCropStyle: GoogleAppsScript.Card_Service.ImageCropType = CardService.ImageCropType.SQUARE,
+    iconCropStyle: GoogleAppsScript.Card_Service.ImageCropType = CardService.ImageCropType.SQUARE
 ) {
     const widget = CardService.newDecoratedText().setText(content).setWrapText(true);
     if (label && label.length) {
@@ -71,7 +71,7 @@ export function createKeyValueWidget(
             CardService.newIconImage()
                 .setIconUrl(icon)
                 .setImageCropType(iconCropStyle)
-                .setAltText(escapeHtml(iconLabel || label)),
+                .setAltText(escapeHtml(iconLabel || label))
         );
     }
 
@@ -101,7 +101,7 @@ export function actionCall(state: State, functionName: string, parameters: any =
         .setParameters({
             functionName: functionName,
             state: state.toJson(),
-            parameters: JSON.stringify(parameters),
+            parameters: JSON.stringify(parameters)
         });
 }
 

@@ -80,7 +80,7 @@ export function buildCreateTaskView(state: State, query: string = "", hideCreate
 
     if (!noProject) {
         const projectSection = CardService.newCardSection().setHeader(
-            "<b>" + _t("Create a Task in an existing Project") + "</b>",
+            "<b>" + _t("Create a Task in an existing Project") + "</b>"
         );
 
         projectSection.addWidget(
@@ -90,9 +90,9 @@ export function buildCreateTaskView(state: State, query: string = "", hideCreate
                 .setValue(query || "")
                 .setOnChangeAction(
                     actionCall(state, onSearchProjectClick.name, {
-                        hideCreateProjectSection: hideCreateProjectSection,
-                    }),
-                ),
+                        hideCreateProjectSection: hideCreateProjectSection
+                    })
+                )
         );
 
         projectSection.addWidget(
@@ -100,9 +100,9 @@ export function buildCreateTaskView(state: State, query: string = "", hideCreate
                 .setText(_t("Search"))
                 .setOnClickAction(
                     actionCall(state, onSearchProjectClick.name, {
-                        hideCreateProjectSection: hideCreateProjectSection,
-                    }),
-                ),
+                        hideCreateProjectSection: hideCreateProjectSection
+                    })
+                )
         );
 
         if (!projects.length) {
@@ -115,7 +115,7 @@ export function buildCreateTaskView(state: State, query: string = "", hideCreate
                 null,
                 project.partnerName,
                 null,
-                actionCall(state, onSelectProject.name, { project: project }),
+                actionCall(state, onSelectProject.name, { project: project })
             );
 
             projectSection.addWidget(projectCard);
@@ -125,17 +125,17 @@ export function buildCreateTaskView(state: State, query: string = "", hideCreate
 
     if (!hideCreateProjectSection && state.canCreateProject) {
         const createProjectSection = CardService.newCardSection().setHeader(
-            "<b>" + _t("Create a Task in a new Project") + "</b>",
+            "<b>" + _t("Create a Task in a new Project") + "</b>"
         );
 
         createProjectSection.addWidget(
-            CardService.newTextInput().setFieldName("new_project_name").setTitle(_t("Project Name")).setValue(""),
+            CardService.newTextInput().setFieldName("new_project_name").setTitle(_t("Project Name")).setValue("")
         );
 
         createProjectSection.addWidget(
             CardService.newTextButton()
                 .setText(_t("Create Project & Task"))
-                .setOnClickAction(actionCall(state, onCreateProjectClick.name)),
+                .setOnClickAction(actionCall(state, onCreateProjectClick.name))
         );
         card.addSection(createProjectSection);
     } else if (noProject) {
@@ -147,8 +147,8 @@ export function buildCreateTaskView(state: State, query: string = "", hideCreate
 
         noProjectSection.addWidget(
             CardService.newTextParagraph().setText(
-                _t("There are no project in your database. Please ask your project manager to create one."),
-            ),
+                _t("There are no project in your database. Please ask your project manager to create one.")
+            )
         );
 
         card.addSection(noProjectSection);

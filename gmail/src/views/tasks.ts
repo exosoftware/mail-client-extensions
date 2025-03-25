@@ -46,7 +46,7 @@ export function buildTasksView(state: State, card: Card) {
 
     if (state.partner.id) {
         tasksSection.addWidget(
-            CardService.newTextButton().setText(_t("Create")).setOnClickAction(actionCall(state, onCreateTask.name)),
+            CardService.newTextButton().setText(_t("Create")).setOnClickAction(actionCall(state, onCreateTask.name))
         );
 
         for (let task of tasks) {
@@ -62,8 +62,8 @@ export function buildTasksView(state: State, card: Card) {
                     .setIconUrl(UI_ICONS.email_in_odoo)
                     .setOnClickAction(
                         actionCall(state, onLogEmailOnTask.name, {
-                            taskId: task.id,
-                        }),
+                            taskId: task.id
+                        })
                     );
             }
 
@@ -74,15 +74,15 @@ export function buildTasksView(state: State, card: Card) {
                     null,
                     null,
                     taskButton,
-                    odooServerUrl + `/web#id=${task.id}&model=project.task&view_type=form${cids}`,
-                ),
+                    odooServerUrl + `/web#id=${task.id}&model=project.task&view_type=form${cids}`
+                )
             );
         }
     } else if (state.canCreatePartner) {
         tasksSection.addWidget(CardService.newTextParagraph().setText(_t("Save the contact to create new tasks.")));
     } else {
         tasksSection.addWidget(
-            CardService.newTextParagraph().setText(_t("The Contact needs to exist to create Task.")),
+            CardService.newTextParagraph().setText(_t("The Contact needs to exist to create Task."))
         );
     }
 

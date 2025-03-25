@@ -18,7 +18,7 @@ const _ERROR_CODE_MESSAGES: Record<string, string> = {
     unknown: "Something bad happened. Please, try again later.",
     // Attachment
     attachments_size_exceeded:
-        "Attachments could not be logged in Odoo because their total size exceeded the allowed maximum.",
+        "Attachments could not be logged in Odoo because their total size exceeded the allowed maximum."
 };
 
 /**

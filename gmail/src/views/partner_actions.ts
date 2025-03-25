@@ -23,7 +23,7 @@ function onReloadPartner(state: State) {
         state.odooUserCompanies,
         state.canCreatePartner,
         state.canCreateProject,
-        state.error,
+        state.error
     ] = Partner.getPartner(state.partner.email, state.partner.name, state.partner.id);
 
     return updateCard(buildView(state));
@@ -41,7 +41,7 @@ export function buildPartnerActionView(state: State, partnerSection: CardSection
                 CardService.newImageButton()
                     .setAltText(_t("Refresh"))
                     .setIconUrl(UI_ICONS.reload)
-                    .setOnClickAction(actionCall(state, onReloadPartner.name)),
+                    .setOnClickAction(actionCall(state, onReloadPartner.name))
             );
         }
 
@@ -49,7 +49,7 @@ export function buildPartnerActionView(state: State, partnerSection: CardSection
             CardService.newImageButton()
                 .setAltText(_t("Search contact"))
                 .setIconUrl(UI_ICONS.search)
-                .setOnClickAction(actionCall(state, onSearchPartner.name)),
+                .setOnClickAction(actionCall(state, onSearchPartner.name))
         );
 
         partnerSection.addWidget(actionButtonSet);
@@ -61,7 +61,7 @@ export function buildPartnerActionView(state: State, partnerSection: CardSection
             CardService.newImageButton()
                 .setAltText(_t("Search contact"))
                 .setIconUrl(UI_ICONS.search)
-                .setOnClickAction(actionCall(state, buildLoginMainView.name)),
+                .setOnClickAction(actionCall(state, buildLoginMainView.name))
         );
 
         partnerSection.addWidget(actionButtonSet);

@@ -39,7 +39,7 @@ function onOpenPartner(state: State, parameters: any) {
     const [newPartner, odooUserCompanies, canCreatePartner, canCreateProject, error] = Partner.getPartner(
         partner.email,
         partner.name,
-        partner.id,
+        partner.id
     );
     const newState = new State(
         newPartner,
@@ -49,7 +49,7 @@ function onOpenPartner(state: State, parameters: any) {
         null,
         null,
         canCreateProject,
-        error,
+        error
     );
     return pushCard(buildView(newState));
 }
@@ -73,13 +73,11 @@ export function buildSearchPartnerView(state: State, query: string, initialSearc
             .setFieldName("search_partner_query")
             .setTitle(_t("Search contact"))
             .setValue(searchValue)
-            .setOnChangeAction(actionCall(state, onSearchPartnerClick.name)),
+            .setOnChangeAction(actionCall(state, onSearchPartnerClick.name))
     );
 
     searchSection.addWidget(
-        CardService.newTextButton()
-            .setText(_t("Search"))
-            .setOnClickAction(actionCall(state, onSearchPartnerClick.name)),
+        CardService.newTextButton().setText(_t("Search")).setOnClickAction(actionCall(state, onSearchPartnerClick.name))
     );
 
     for (let partner of partners) {
@@ -90,7 +88,7 @@ export function buildSearchPartnerView(state: State, query: string, initialSearc
             .setStartIcon(
                 CardService.newIconImage()
                     .setIconUrl(partner.image || (partner.isCompany ? UI_ICONS.no_company : UI_ICONS.person))
-                    .setImageCropType(CardService.ImageCropType.CIRCLE),
+                    .setImageCropType(CardService.ImageCropType.CIRCLE)
             );
 
         if (partner.isWriteable) {
@@ -102,13 +100,13 @@ export function buildSearchPartnerView(state: State, query: string, initialSearc
                           .setOnClickAction(
                               actionCall(state, onLogEmailPartner.name, {
                                   partnerId: partner.id,
-                                  query: query,
-                              }),
+                                  query: query
+                              })
                           )
                     : CardService.newImageButton()
                           .setAltText(_t("Email already logged on the contact"))
                           .setIconUrl(UI_ICONS.email_logged)
-                          .setOnClickAction(actionCall(state, onEmailAlreadyLogged.name)),
+                          .setOnClickAction(actionCall(state, onEmailAlreadyLogged.name))
             );
         }
 

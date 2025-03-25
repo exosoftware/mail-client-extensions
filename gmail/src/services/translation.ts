@@ -28,7 +28,7 @@ export class Translate {
             this.translations = postJsonRpc(
                 odooServerUrl + URLS.GET_TRANSLATIONS,
                 {},
-                { Authorization: "Bearer " + odooAccessToken },
+                { Authorization: "Bearer " + odooAccessToken }
             );
 
             if (this.translations) {
@@ -67,7 +67,7 @@ export class Translate {
                 Object.keys(parameters)
                     .map((x) => `%\\(${x}\\)s`)
                     .join("|"),
-                "gi",
+                "gi"
             );
             return translated.replace(re, (key) => parameters[key.substring(2, key.length - 2)] || "");
         }

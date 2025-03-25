@@ -57,7 +57,7 @@ export function buildTicketsView(state: State, card: Card) {
 
     if (state.partner.id) {
         ticketsSection.addWidget(
-            CardService.newTextButton().setText(_t("Create")).setOnClickAction(actionCall(state, onCreateTicket.name)),
+            CardService.newTextButton().setText(_t("Create")).setOnClickAction(actionCall(state, onCreateTicket.name))
         );
 
         const cids = state.odooCompaniesParameter;
@@ -75,8 +75,8 @@ export function buildTicketsView(state: State, card: Card) {
                     .setIconUrl(UI_ICONS.email_in_odoo)
                     .setOnClickAction(
                         actionCall(state, "onLogEmailOnTicket", {
-                            ticketId: ticket.id,
-                        }),
+                            ticketId: ticket.id
+                        })
                     );
             }
 
@@ -87,15 +87,15 @@ export function buildTicketsView(state: State, card: Card) {
                     null,
                     null,
                     ticketButton,
-                    odooServerUrl + `/web#id=${ticket.id}&model=helpdesk.ticket&view_type=form${cids}`,
-                ),
+                    odooServerUrl + `/web#id=${ticket.id}&model=helpdesk.ticket&view_type=form${cids}`
+                )
             );
         }
     } else if (state.canCreatePartner) {
         ticketsSection.addWidget(CardService.newTextParagraph().setText(_t("Save the contact to create new tickets.")));
     } else {
         ticketsSection.addWidget(
-            CardService.newTextParagraph().setText(_t("The Contact needs to exist to create Ticket.")),
+            CardService.newTextParagraph().setText(_t("The Contact needs to exist to create Ticket."))
         );
     }
 

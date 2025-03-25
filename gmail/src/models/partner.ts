@@ -113,7 +113,7 @@ export class Partner {
         const response = postJsonRpcCached(URLS.IAP_COMPANY_ENRICHMENT, {
             email: userEmail,
             domain: senderDomain,
-            secret: odooSharedSecret,
+            secret: odooSharedSecret
         });
 
         const error = new ErrorMessage();
@@ -142,7 +142,7 @@ export class Partner {
         const odooAccessToken = getAccessToken();
 
         const response = postJsonRpc(url, partnerValues, {
-            Authorization: "Bearer " + odooAccessToken,
+            Authorization: "Bearer " + odooAccessToken
         });
 
         return response && response.id;
@@ -161,7 +161,7 @@ export class Partner {
     static getPartner(
         email: string,
         name: string,
-        partnerId: number = null,
+        partnerId: number = null
     ): [Partner, number[], boolean, boolean, ErrorMessage] {
         const url = PropertiesService.getUserProperties().getProperty("ODOO_SERVER_URL") + URLS.GET_PARTNER;
         const odooAccessToken = getAccessToken();
@@ -169,7 +169,7 @@ export class Partner {
         const response = postJsonRpc(
             url,
             { email: email, name: name, partner_id: partnerId },
-            { Authorization: "Bearer " + odooAccessToken },
+            { Authorization: "Bearer " + odooAccessToken }
         );
 
         if (!response || !response.partner) {

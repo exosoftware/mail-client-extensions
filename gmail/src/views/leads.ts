@@ -53,13 +53,13 @@ export function buildLeadsView(state: State, card: Card) {
     const loggingState = State.getLoggingState(state.email.messageId);
 
     const leadsSection = CardService.newCardSection().setHeader(
-        "<b>" + _t("Opportunities (%s)", leads.length) + "</b>",
+        "<b>" + _t("Opportunities (%s)", leads.length) + "</b>"
     );
     const cids = state.odooCompaniesParameter;
 
     if (state.partner.id) {
         leadsSection.addWidget(
-            CardService.newTextButton().setText(_t("Create")).setOnClickAction(actionCall(state, onCreateLead.name)),
+            CardService.newTextButton().setText(_t("Create")).setOnClickAction(actionCall(state, onCreateLead.name))
         );
 
         for (let lead of leads) {
@@ -71,13 +71,13 @@ export function buildLeadsView(state: State, card: Card) {
                         expected_revenue: lead.expectedRevenue,
                         probability: lead.probability,
                         recurring_revenue: lead.recurringRevenue,
-                        recurring_plan: lead.recurringPlan,
-                    },
+                        recurring_plan: lead.recurringPlan
+                    }
                 );
             } else {
                 leadRevenuesDescription = _t("%(expected_revenue)s at %(probability)s%", {
                     expected_revenue: lead.expectedRevenue,
-                    probability: lead.probability,
+                    probability: lead.probability
                 });
             }
 
@@ -93,8 +93,8 @@ export function buildLeadsView(state: State, card: Card) {
                     .setIconUrl(UI_ICONS.email_in_odoo)
                     .setOnClickAction(
                         actionCall(state, onLogEmailOnLead.name, {
-                            leadId: lead.id,
-                        }),
+                            leadId: lead.id
+                        })
                     );
             }
 
@@ -105,15 +105,15 @@ export function buildLeadsView(state: State, card: Card) {
                     null,
                     leadRevenuesDescription,
                     leadButton,
-                    odooServerUrl + `/web#id=${lead.id}&model=crm.lead&view_type=form${cids}`,
-                ),
+                    odooServerUrl + `/web#id=${lead.id}&model=crm.lead&view_type=form${cids}`
+                )
             );
         }
     } else if (state.canCreatePartner) {
         leadsSection.addWidget(CardService.newTextParagraph().setText(_t("Save Contact to create new Opportunities.")));
     } else {
         leadsSection.addWidget(
-            CardService.newTextParagraph().setText(_t("You can only create opportunities for existing customers.")),
+            CardService.newTextParagraph().setText(_t("You can only create opportunities for existing customers."))
         );
     }
 

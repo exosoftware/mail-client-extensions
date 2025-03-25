@@ -9,14 +9,14 @@ export function postJsonRpc(url: string, data = {}, headers = {}, options: any =
         id: 0,
         jsonrpc: "2.0",
         method: "call",
-        params: data,
+        params: data
     };
 
     const httpOptions = {
         method: "post" as GoogleAppsScript.URL_Fetch.HttpMethod,
         contentType: "application/json",
         payload: JSON.stringify(data),
-        headers: headers,
+        headers: headers
     };
 
     try {

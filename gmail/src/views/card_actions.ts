@@ -13,7 +13,7 @@ function onLogout(state: State) {
 
     const [partner, odooUserCompanies, canCreatePartner, canCreateProject, error] = Partner.enrichPartner(
         state.email.contactEmail,
-        state.email.contactName,
+        state.email.contactName
     );
     const newState = new State(
         partner,
@@ -23,7 +23,7 @@ function onLogout(state: State) {
         null,
         null,
         canCreateProject,
-        error,
+        error
     );
     return pushToRoot(buildView(newState));
 }
@@ -33,11 +33,11 @@ export function buildCardActionsView(state: State, card: Card) {
 
     if (State.isLogged) {
         card.addCardAction(
-            CardService.newCardAction().setText(_t("Logout")).setOnClickAction(actionCall(state, onLogout.name)),
+            CardService.newCardAction().setText(_t("Logout")).setOnClickAction(actionCall(state, onLogout.name))
         );
     }
 
     card.addCardAction(
-        CardService.newCardAction().setText(_t("Debug")).setOnClickAction(actionCall(state, buildDebugView.name)),
+        CardService.newCardAction().setText(_t("Debug")).setOnClickAction(actionCall(state, buildDebugView.name))
     );
 }

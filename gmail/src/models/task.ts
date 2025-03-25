@@ -43,7 +43,7 @@ export class Task {
         const response = postJsonRpc(
             url,
             { email_subject: emailSubject, email_body: emailBody, project_id: projectId, partner_id: partnerId },
-            { Authorization: "Bearer " + odooAccessToken },
+            { Authorization: "Bearer " + odooAccessToken }
         );
 
         const taskId = response ? response.task_id || null : null;
@@ -54,7 +54,7 @@ export class Task {
 
         return Task.fromJson({
             id: taskId,
-            name: response.name,
+            name: response.name
         });
     }
 }

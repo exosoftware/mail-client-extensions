@@ -36,7 +36,7 @@ function onSavePartner(state: State) {
     const partnerValues = {
         name: state.partner.name,
         email: state.partner.email,
-        company: state.partner.company && state.partner.company.id,
+        company: state.partner.company && state.partner.company.id
     };
 
     const partnerId = Partner.savePartner(partnerValues);
@@ -110,7 +110,7 @@ export function buildPartnerView(state: State, card: Card) {
             : actionCall(state, buildLoginMainView.name),
         false,
         partner.email,
-        CardService.ImageCropType.CIRCLE,
+        CardService.ImageCropType.CIRCLE
     );
 
     partnerSection.addWidget(partnerCard);
