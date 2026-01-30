@@ -2,7 +2,7 @@ import { formatUrl, repeat } from "../utils/format";
 import { notify, createKeyValueWidget } from "./helpers";
 import { State } from "../models/state";
 import { IMAGES_LOGIN } from "./icons";
-import { isOdooDatabaseReachable } from "../services/odoo_auth";
+import { getSupportedAddinVersion } from "../services/odoo_auth";
 import { _t, clearTranslationCache } from "../services/translation";
 import { setOdooServerUrl } from "src/services/app_properties";
 
@@ -17,9 +17,15 @@ function onNextLogin(event) {
 
     setOdooServerUrl(validatedUrl);
 
-    if (!isOdooDatabaseReachable(validatedUrl)) {
+    const version = getSupportedAddinVersion(validatedUrl);
+
+    if (!version) {
+        return notify("Could not connect to your database.");
+    }
+
+    if (version !== 1) {
         return notify(
-            "Could not connect to your database. Make sure the module is installed in Odoo (Settings > General Settings > Integrations > Mail Plugins)"
+            "This addin version required Odoo 19.1 or an older version, please install a newer addin version.",
         );
     }
 
@@ -28,7 +34,7 @@ function onNextLogin(event) {
             CardService.newOpenLink()
                 .setUrl(State.odooLoginUrl)
                 .setOpenAs(CardService.OpenAs.OVERLAY)
-                .setOnClose(CardService.OnClose.RELOAD_ADD_ON)
+                .setOnClose(CardService.OnClose.RELOAD),
         )
         .build();
 }

@@ -34,6 +34,7 @@
     "https://*.exosoftware.pt/web/login",
     "https://*.exosoftware.pt/mail_plugin/auth",
     "https://*.exosoftware.pt/mail_plugin/auth/access_token",
+    "https://*.exosoftware.pt/mail_plugin/auth/check_version",
     "https://exosoftware.pt/mail_plugin/get_translations",
     "https://exosoftware.pt/mail_plugin/partner/get",
     "https://exosoftware.pt/mail_plugin/log_mail_content",
@@ -49,6 +50,7 @@
     "https://exosoftware.pt/web/login",
     "https://exosoftware.pt/mail_plugin/auth",
     "https://exosoftware.pt/mail_plugin/auth/access_token",
+    "https://exosoftware.pt/mail_plugin/auth/check_version",
     "https://iap-services.exosoftware.pt/iap/mail_extension/enrich"
   ]
 }
