@@ -3,6 +3,11 @@
 # build-push
 # A local image builder and pusher
 ####################################
+set -e
+
+# Run from the script's own directory so the build context (and the
+# Dockerfile) resolve no matter where the script is called from.
+cd "$(dirname "$0")"
 
 REPO="ghcr.io/exosoftware/gmail-addon"
 TAG="${1:-latest}"
