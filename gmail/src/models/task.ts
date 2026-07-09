@@ -1,8 +1,6 @@
-import { URLS } from "../consts";
 import { postJsonRpc } from "../utils/http";
-import { Email } from "./email";
-import { Partner } from "./partner";
-import { User } from "./user";
+import { URLS } from "../const";
+import { getAccessToken } from "src/services/odoo_auth";
 
 /**
  * Represent a "project.task" record.
@@ -28,7 +26,7 @@ export class Task {
      */
     static fromOdooResponse(values: any): Task {
         const task = new Task();
-        task.id = values.id;
+        task.id = values.task_id;
         task.name = values.name;
         task.projectName = values.project_name;
         return task;
@@ -38,34 +36,25 @@ export class Task {
      * Make a RPC call to the Odoo database to create a task
      * and return the ID of the newly created record.
      */
-    static async createTask(
-        user: User,
-        partner: Partner,
-        projectId: number,
-        email: Email,
-    ): Promise<[Task, Partner] | null> {
-        const [body, _, attachmentsParsed] = await email.getBodyAndAttachments();
-        const response = await postJsonRpc(
-            user.odooUrl + URLS.CREATE_TASK,
-            {
-                email_body: body,
-                email_subject: email.subject,
-                partner_email: partner.email,
-                partner_id: partner.id,
-                partner_name: partner.name,
-                project_id: projectId,
-                attachments: attachmentsParsed[0],
-            },
-            { Authorization: "Bearer " + user.odooToken },
+    static createTask(partnerId: number, projectId: number, emailBody: string, emailSubject: string): Task {
+        const url = PropertiesService.getUserProperties().getProperty("ODOO_SERVER_URL") + URLS.CREATE_TASK;
+        const odooAccessToken = getAccessToken();
+
+        const response = postJsonRpc(
+            url,
+            { email_subject: emailSubject, email_body: emailBody, project_id: projectId, partner_id: partnerId },
+            { Authorization: "Bearer " + odooAccessToken }
         );
-        if (!response?.id) {
+
+        const taskId = response ? response.task_id || null : null;
+
+        if (!taskId) {
             return null;
         }
-        if (!partner.id) {
-            partner.id = response.partner_id;
-            partner.image = response.partner_image;
-            partner.isWritable = true;
-        }
-        return [Task.fromOdooResponse(response), partner];
+
+        return Task.fromJson({
+            id: taskId,
+            name: response.name
+        });
     }
 }

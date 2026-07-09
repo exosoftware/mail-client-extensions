@@ -1,8 +1,7 @@
-import { URLS } from "../consts";
 import { postJsonRpc } from "../utils/http";
-import { Email } from "./email";
-import { Partner } from "./partner";
-import { User } from "./user";
+import { isTrue } from "../utils/format";
+import { URLS } from "../const";
+import { getAccessToken } from "src/services/odoo_auth";
 
 /**
  * Represent a "crm.lead" record.
@@ -10,41 +9,26 @@ import { User } from "./user";
 export class Lead {
     id: number;
     name: string;
-    revenuesDescription: string;
+    expectedRevenue: string;
+    probability: number;
+    recurringRevenue: string;
+    recurringPlan: string;
 
     /**
      * Make a RPC call to the Odoo database to create a lead
      * and return the ID of the newly created record.
      */
-    static async createLead(
-        user: User,
-        partner: Partner,
-        email: Email,
-    ): Promise<[Lead, Partner] | null> {
-        const [body, _, attachmentsParsed] = await email.getBodyAndAttachments();
+    static createLead(partnerId: number, emailBody: string, emailSubject: string): number {
+        const url = PropertiesService.getUserProperties().getProperty("ODOO_SERVER_URL") + URLS.CREATE_LEAD;
+        const accessToken = getAccessToken();
 
-        const response = await postJsonRpc(
-            user.odooUrl + URLS.CREATE_LEAD,
-            {
-                email_body: body,
-                email_subject: email.subject,
-                partner_id: partner.id,
-                partner_email: partner.email,
-                partner_name: partner.name,
-                attachments: attachmentsParsed[0],
-            },
-            { Authorization: "Bearer " + user.odooToken },
+        const response = postJsonRpc(
+            url,
+            { email_body: emailBody, email_subject: emailSubject, partner_id: partnerId },
+            { Authorization: "Bearer " + accessToken }
         );
 
-        if (!response?.id) {
-            return null;
-        }
-        if (!partner.id) {
-            partner.id = response.partner_id;
-            partner.image = response.partner_image;
-            partner.isWritable = true;
-        }
-        return [Lead.fromOdooResponse(response), partner];
+        return response ? response.lead_id || null : null;
     }
 
     /**
@@ -54,7 +38,10 @@ export class Lead {
         const lead = new Lead();
         lead.id = values.id;
         lead.name = values.name;
-        lead.revenuesDescription = values.revenuesDescription;
+        lead.expectedRevenue = values.expectedRevenue;
+        lead.probability = values.probability;
+        lead.recurringRevenue = values.recurringRevenue;
+        lead.recurringPlan = values.recurringPlan;
         return lead;
     }
 
@@ -63,9 +50,16 @@ export class Lead {
      */
     static fromOdooResponse(values: any): Lead {
         const lead = new Lead();
-        lead.id = values.id;
+        lead.id = values.lead_id;
         lead.name = values.name;
-        lead.revenuesDescription = values.revenues_description;
+        lead.expectedRevenue = values.expected_revenue;
+        lead.probability = values.probability;
+
+        if (isTrue(values.recurring_revenue) && isTrue(values.recurring_plan)) {
+            lead.recurringRevenue = values.recurring_revenue;
+            lead.recurringPlan = values.recurring_plan;
+        }
+
         return lead;
     }
 }
