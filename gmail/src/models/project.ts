@@ -77,7 +77,7 @@ export class Project {
 
         return Project.fromJson({
             id: projectId,
-            name: response.name
+            name: response.name,
         });
     }
 }
