@@ -9,7 +9,7 @@ set -e
 # Dockerfile) resolve no matter where the script is called from.
 cd "$(dirname "$0")"
 
-REPO="ghcr.io/exosoftware/gmail-addon"
+REPO="ghcr.io/exosoftware/mail-client-extensions"
 TAG="${1:-latest}"
 
 IMAGE_NAME="$REPO:$TAG"
