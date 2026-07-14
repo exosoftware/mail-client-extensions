@@ -15,7 +15,7 @@
           "contextualTriggers": [
             {
               "unconditional": {},
-              "onTriggerFunction": "https://<domain>/on_open_email"
+              "onTriggerFunction": "https://gmail-addon.exo.pt/on_open_email"
             }
           ]
      },
